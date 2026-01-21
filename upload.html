@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload tài liệu</title>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="upload.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<header>
+    <div class="header">
+        <div class="logo">
+            <h1 onclick="location.reload()">PRISM</h1>
+        </div>
+
+        <div class="search-wrapper">
+            <div class="search-icon-left">
+                <i data-lucide="search" width="18" height="18" stroke-width="2.5"></i>
+            </div>
+            <input type="text" class="search-input" placeholder="Search">
+        </div>
+
+        <div class="login">
+            <button type="button">Đăng nhập</button>
+        </div>
+    </div>
+</header>
+
+<main>
+    <div class="main">
+        <input type="file" id="fileInput" accept=".pdf,.doc,.docx" hidden >
+        <div class="main_img" id="dropArea">
+            <div class="main_img-cloud">
+                <img src="image/cloud.svg" alt="cloud">
+            </div>
+            <div class="main_img-text">Kéo và thả tệp</div>
+        </div>
+
+        <div class="main_text">
+            <div class="main_text-line"></div>
+            <div class="main_text-or">hoặc</div>
+            <div class="main_text-line"></div>
+        </div>
+
+        <div class="main_button">
+            <button type="button" id="chooseFileBtn">Chọn tệp</button>
+            <h3 class="add">Hỗ trợ các tệp: pdf, doc, docx</h3>
+            <p id="fileInfo"></p>
+            <a href="discript.html">
+                <button type="button" id="uploadBtn">Hoàn tất</button>
+            </a>
+        </div>
+
+    </div>
+</main>
+
+<footer>
+    <div class="footer_content">
+        <div class="footer_content-brand">
+            <h1 onclick="location.reload()">PRISM</h1>
+            <p>Nơi khơi nguồn sáng tạo, kết nối tri thức và phát triển kỹ năng mềm cho thế hệ trẻ.</p>
+        </div>
+
+        <div class="footer_content-support">
+            <h2>Thông tin & hỗ trợ</h2>
+            <ul>
+                <li><a href="#">Giới thiệu</a></li>
+                <li><a href="#">Điều khoản sử dụng</a></li>
+                <li><a href="#">Chính sách bảo mật</a></li>
+                <li><a href="#">FAQ</a></li>
+            </ul>
+        </div>
+
+        <div class="footer_content-contact">
+            <h2>Kết nối cộng đồng</h2>
+            <ul>
+                <li><a href="#"><img src="image/ri_facebook-fill.svg" alt="FB"></a></li>
+                <li><a href="#"><img src="image/ri_tiktok-fill.svg" alt="TT"></a></li>
+                <li><a href="#"><img src="image/ri_instagram-fill.svg" alt="IG"></a></li>
+                <li><a href="#"><img src="image/ri_youtube-fill.svg" alt="YT"></a></li>
+            </ul>
+            <div class="email-box">
+                <h3>Email: prism.studio@gmail.com</h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer_line"></div>
+
+    <div class="footer_credit">
+        © 2026 Prism Studio. Bảo lưu mọi quyền.<br>
+        Phát triển cộng đồng bền vững trên nền tảng tri thức Việt.
+    </div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script type="module" src="upload.js"></script>
+</body>
+</html>

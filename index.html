@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <title>Trang chủ</title>
+</head>
+
+<body>
+    <header>
+        <div class="header">
+
+            <button class="sidebar-toggle" id="toggleSidebar">
+                <i data-lucide="menu"></i>
+            </button>
+            
+            <div class="logo">
+                <h1 onclick="location.reload()">PRISM</h1>
+            </div>
+
+            <div class="search-wrapper">
+                <div class="search-icon-left">
+                    <i data-lucide="search" width="18" height="18" stroke-width="2.5"></i>
+                </div>
+                <input type="text" class="search-input" placeholder="Search">
+            </div>
+
+            <div class="login">
+                <button type="button">Đăng nhập</button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="main_sidebar" id="sidebar">
+            <div class="sidebar_area-1">
+                <div class="sidebar_area-1-text">
+                    <p>Tham gia cùng Prism để lưu tài liệu</p>
+                    <p>và cập nhật bài viết</p>
+                </div>
+
+                <div class="sidebar_area-1-login">
+                    <button type="button">
+                        <img src="image/main_login.svg" alt="login-icon" />
+                        <p>Đăng nhập</p>
+                    </button>
+                </div>
+
+                <div class="sidebar_area-1-up">
+                    <button type="button">
+                        <img src="image/main_add.svg" alt="add" />
+                        <a href="upload.html">Tải tài liệu lên</a>
+                    </button>
+                </div>
+
+            </div>
+
+            <div class="sidebar_area-2">
+
+                <div class="sidebar_item-1">
+
+                    <button type="button">
+                        <img src="image/main_trangchu.svg" alt="home" />
+                        <p>Trang chủ</p>
+                    </button>
+
+                    <button type="button">
+                        <img src="image/main_thuvien.svg" alt="document" />
+                        <p>Thư viện</p>
+                    </button>
+
+                    <button type="button">
+                        <img src="image/main_lichsu.svg" alt="history" />
+                        <p>Lịch sử</p>
+                    </button>
+
+                </div>
+
+                <div class="sidebar_item-2">
+
+                    <button type="button">
+                        <img src="image/main_hotro.svg" alt="support" />
+                        <p>Hỗ trợ</p>
+                    </button>
+
+                    <button type="button">
+                        <img src="image/main_caidat.svg" alt="setting" />
+                        <p>Cài đặt</p>
+                    </button>
+
+                    <button type="button">
+                        <img src="image/main_thongtin.svg" alt="information" />
+                        <p>Thông tin</p>
+                    </button>
+
+                </div>
+
+                <div class="sidebar_item-3">
+                    <ul>
+                        <li><a href="#">Terms</a></li>
+                        <li><a href="#">Privacy</a></li>
+                    </ul>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="main_content">
+
+            <div class="content-text">
+                Tài liệu đã tải lên
+            </div>
+
+            <div class="content-document">
+                <a href="#" class="document-link">
+                    <div class="document-item">
+                        <div class="dcmt-image">
+                            <img src="image/main_document-img.jpeg" alt="doc-sample" />
+                        </div>
+                        <div class="dcmt-info">
+                            <p class="dcmt-title">Mối quan hệ biện chứng giữa vật chất và ý thức</p>
+                            <div class="dcmt-type">
+                                <img src="image/main_doc.svg" alt="pdf-icon" />
+                                <p>Document</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <a href="#" class="document-link">
+                    <div class="document-item">
+                        <div class="dcmt-image">
+                            <img src="image/main_document-img.jpeg" alt="doc-sample" />
+                        </div>
+                        <div class="dcmt-info">
+                            <p class="dcmt-title">Giáo trình GDQP HP1-2: Nội dung cơ bản về quốc phòng</p>
+                            <div class="dcmt-type">
+                                <img src="image/main_doc.svg" alt="pdf-icon" />
+                                <p>GDQP</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+                <!--- Document Item 4 -->
+                <a href="#" class="document-link">
+                    <div class="document-item">
+                        <div class="dcmt-image">
+                            <img src="image/main_document-img.jpeg" alt="doc-sample" />
+                        </div>
+                        <div class="dcmt-info">
+                            <p class="dcmt-title">Bài 2: Kỹ thuật bắn súng tiểu liên AK</p>
+                            <div class="dcmt-type">
+                                <img src="image/main_doc.svg" alt="pdf-icon" />
+                                <p>GDQP</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <a href="#" class="document-link">
+                    <div class="document-item">
+                        <div class="dcmt-image">
+                            <img src="image/main_document-img.jpeg" alt="doc-sample" />
+                        </div>
+                        <div class="dcmt-info">
+                            <p class="dcmt-title">Hướng dẫn thực hiện đồ án phát triển hệ thống thông tin</p>
+                            <div class="dcmt-type">
+                                <img src="image/main_doc.svg" alt="pdf-icon" />
+                                <p>KTPM</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <a href="#" class="document-link">
+                    <div class="document-item">
+                        <div class="dcmt-image">
+                            <img src="image/main_document-img.jpeg" alt="doc-sample" />
+                        </div>
+                        <div class="dcmt-info">
+                            <p class="dcmt-title">Đề cương ôn tập Triết học Mác - Lênin (Mới nhất 2024)</p>
+                            <div class="dcmt-type">
+                                <img src="image/main_doc.svg" alt="pdf-icon" />
+                                <p>Triết học Mac-Lenin</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <a href="#" class="document-link">
+                    <div class="document-item">
+                        <div class="dcmt-image">
+                            <img src="image/main_document-img.jpeg" alt="doc-sample" />
+                        </div>
+                        <div class="dcmt-info">
+                            <p class="dcmt-title">Tổng hợp công thức Toán cao cấp A1 - Giải tích 1</p>
+                            <div class="dcmt-type">
+                                <img src="image/main_doc.svg" alt="pdf-icon" />
+                                <p>Toán cao cấp 1</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <a href="#" class="document-link">
+                    <div class="document-item">
+                        <div class="dcmt-image">
+                            <img src="image/main_document-img.jpeg" alt="doc-sample" />
+                        </div>
+                        <div class="dcmt-info">
+                            <p class="dcmt-title">Slide bài giảng Kinh tế vi mô - Chương 3: Lý thuyết hành vi</p>
+                            <div class="dcmt-type">
+                                <img src="image/main_doc.svg" alt="pdf-icon" />
+                                <p>Kinh tế vi mô</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="content-loadmore">
+                <div class="loadmore-left">
+                    <button type="button">
+                        <img src="image/←.svg" alt="loadmore" />
+                    </button>
+                </div>
+                <div class="loadmore-center">
+                    <p>Trang 1/3</p>
+                </div>
+                <div class="loadmore-right">
+                    <button type="button">
+                        <img src="image/→.svg" alt="loadmore" />
+                    </button>
+                </div>
+            </div>
+
+        </div>
+        
+    </main>
+
+    <footer>
+        <div class="footer_content">
+            <div class="footer_content-brand">
+                <h1 onclick="location.reload()">PRISM</h1>
+                <p>Nơi khơi nguồn sáng tạo, kết nối tri thức và phát triển kỹ năng mềm cho thế hệ trẻ.</p>
+            </div>
+
+            <div class="footer_content-support">
+                <h2>Thông tin & hỗ trợ</h2>
+                <ul>
+                    <li><a href="#">Giới thiệu</a></li>
+                    <li><a href="#">Điều khoản sử dụng</a></li>
+                    <li><a href="#">Chính sách bảo mật</a></li>
+                    <li><a href="#">FAQ</a></li>
+                </ul>
+            </div>
+
+            <div class="footer_content-contact">
+                <h2>Kết nối cộng đồng</h2>
+                <ul>
+                    <li><a href="#"><img src="image/ri_facebook-fill.svg" alt="FB"></a></li>
+                    <li><a href="#"><img src="image/ri_tiktok-fill.svg" alt="TT"></a></li>
+                    <li><a href="#"><img src="image/ri_instagram-fill.svg" alt="IG"></a></li>
+                    <li><a href="#"><img src="image/ri_youtube-fill.svg" alt="YT"></a></li>
+                </ul>
+                <div class="email-box">
+                    <h3>Email: prism.studio@gmail.com</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer_line"></div>
+
+        <div class="footer_credit">
+            © 2026 Prism Studio. Bảo lưu mọi quyền.<br>Phát triển cộng đồng bền vững trên nền tảng tri thức Việt.
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
