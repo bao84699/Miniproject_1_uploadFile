@@ -398,6 +398,9 @@ footer {
 a {
     width: 141px;
 }
+button:active {
+    transform: scale(0.9);
+}
 
 @media (max-width: 1024px) {
     .footer_content {
