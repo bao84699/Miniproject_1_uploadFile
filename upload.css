@@ -395,7 +395,7 @@ footer {
     opacity: 0.7;
 }
 
-a {
+#uploadBtn {
     width: 141px;
     text-decoration: none;
 }

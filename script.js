@@ -1,3 +1,4 @@
+import { supabase } from "./supabase-config.js";
 lucide.createIcons();
 const toggleBtn = document.getElementById('toggleSidebar');
 const sidebar = document.getElementById('sidebar');
@@ -13,34 +14,43 @@ document.onclick = function(e) {
     }
 };
 
-document.addEventListener("DOMContentLoaded", () => {
-    const data = sessionStorage.getItem("newDocument");
-    if (!data) return;
-
-    const doc = JSON.parse(data);
+document.addEventListener("DOMContentLoaded", async () => {
     const container = document.querySelector(".content-document");
 
-    const link = document.createElement("a");
-    
-    link.className = "document-link";
-    link.innerHTML = `
-        <div class="document-item">
-            <div class="dcmt-image">
-                <img src="image/main_document-img.jpeg" alt="doc-sample" />
-            </div>
-            <div class="dcmt-info">
-                <p class="dcmt-title">${doc.fileName}</p>
-                <div class="dcmt-type">
-                    <img src="image/main_doc.svg" alt="pdf-icon" />
-                    <p>${doc.subject || "Document"}</p>
+    const { data, error } = await supabase
+        .from("PrismUploadDocuments2026")
+        .select("*")
+        .order("id", { ascending: false });
+
+    if (error) {
+        console.error(error);
+        container.innerHTML = "<p>Không thể tải tài liệu</p>";
+        return;
+    }
+
+    container.innerHTML = "";
+
+    data.forEach(doc => {
+        const link = document.createElement("a");
+        link.href = doc.url;
+        link.className = "document-link";
+        link.target = "_blank";
+
+        link.innerHTML = `
+            <div class="document-item">
+                <div class="dcmt-image">
+                    <img src="image/main_document-img.jpeg" alt="doc" />
+                </div>
+                <div class="dcmt-info">
+                    <p class="dcmt-title">${doc.name}</p>
+                    <div class="dcmt-type">
+                        <img src="image/main_doc.svg" alt="icon" />
+                        <p>${doc.subject || "Document"}</p>
+                    </div>
                 </div>
             </div>
-        </div>
-    `;
+        `;
 
-    // Thêm lên đầu danh sách
-    container.prepend(link);
-
-    // XÓA SAU KHI DÙNG (tránh load lại tạo trùng)
-    sessionStorage.removeItem("newDocument");
+        container.appendChild(link);
+    });
 });

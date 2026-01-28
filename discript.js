@@ -1,31 +1,45 @@
+import { supabase } from "./supabase-config.js";
+
 const submit = document.getElementById("submit");
+const fileNameEl = document.getElementById("nameOfFile");
 
-document.getElementById("nameOfFile").textContent = sessionStorage.getItem("fileName");
+// Hiển thị tên file
+fileNameEl.textContent = sessionStorage.getItem("fileName") || "Không có file";
 
-submit.addEventListener("click", () => {
-    const data = {
-        fileName: sessionStorage.getItem("fileName"),
-        school: document.getElementById("school").value.trim(),
-        subject: document.getElementById("subject").value.trim(),
-        description: document.getElementById("discript").value.trim()
-    };
+submit.addEventListener("click", async () => {
+    const fileName = sessionStorage.getItem("fileName");
+    const fileUrl = sessionStorage.getItem("fileUrl");
 
-    sessionStorage.setItem("newDocument", JSON.stringify(data));
-    
-    if (!data.fileName || !data.school || !data.subject || !data.description) {
-        Swal.fire({
-            icon: "error",
-            title: "Thiếu thông tin",
-            text: "Vui lòng điền đầy đủ thông tin!"
-        });
+    const school = document.getElementById("school").value.trim();
+    const subject = document.getElementById("subject").value.trim();
+    const description = document.getElementById("discript").value.trim();
+
+    if (!fileName || !fileUrl || !school || !subject || !description) {
+        Swal.fire("Thiếu thông tin", "Vui lòng nhập đầy đủ!", "error");
         return;
     }
-    Swal.fire({
-        title: "Gửi thành công!",
-        text: "Thông tin đã được lưu.",
-        icon: "success",
-        draggable: true
-    }).then(()=> {
-        window.location.href = "./index.html";
-    })
+
+    const { error } = await supabase
+        .from("PrismUploadDocuments2026")
+        .insert([
+            {
+                name: fileName,
+                school: school,
+                subject: subject,
+                discription: description, 
+                url: fileUrl
+            }
+        ]);
+
+    if (error) {
+        console.error(error);
+        Swal.fire("Lỗi", "Không thể lưu dữ liệu!", "error");
+        return;
+    }
+
+    Swal.fire("Thành công", "Tài liệu đã được lưu!", "success")
+        .then(() => {
+            sessionStorage.clear();
+            window.location.href = "index.html";
+        });
 });
