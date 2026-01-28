@@ -22,33 +22,40 @@ document.addEventListener("DOMContentLoaded", () => {
             alert("Vui lòng chọn file");
             return;
         }
+        const allowedTypes = [
+            "application/pdf",
+            "application/msword",
+            "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+        ];
 
+        const allowedExt = ["pdf", "doc", "docx"];
+        const ext = file.name.split(".").pop().toLowerCase();
+        if (!allowedTypes.includes(file.type) || !allowedExt.includes(ext)) {
+            alert("Chỉ cho phép upload file PDF, DOC, DOCX");
+            return;
+        }
+        const MAX_SIZE = 10 * 1024 * 1024;
+        if (file.size > MAX_SIZE) {
+            alert("File tối đa 10MB");
+            return;
+        }
         try {
             const ext = file.name.split(".").pop();
             const fileName = `${Date.now()}.${ext}`;
-
-            // ✅ KHÔNG public/
             const filePath = fileName;
-
-            // 1️⃣ Upload
             const { error } = await supabase.storage
                 .from("PrismUploadDocuments2026")
                 .upload(filePath, file);
 
             if (error) throw error;
 
-            // 2️⃣ Public URL
             const { data } = supabase.storage
                 .from("PrismUploadDocuments2026")
                 .getPublicUrl(filePath);
 
-            // 3️⃣ Lưu session
             sessionStorage.setItem("fileName", file.name);
             sessionStorage.setItem("fileUrl", data.publicUrl);
-
-            // 4️⃣ Chuyển trang
             window.location.href = "discript.html";
-
         } catch (err) {
             console.error(err);
             alert("Upload thất bại. Kiểm tra Storage policy!");
