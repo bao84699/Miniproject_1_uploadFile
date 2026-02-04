@@ -3,7 +3,7 @@ import { supabase } from "./supabase-config.js";
 const submit = document.getElementById("submit");
 const fileNameEl = document.getElementById("nameOfFile");
 
-// Hiển thị tên file
+// hiển thị tên file
 fileNameEl.textContent = sessionStorage.getItem("fileName") || "Không có file";
 
 submit.addEventListener("click", async () => {
