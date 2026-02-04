@@ -403,6 +403,9 @@ button:active {
     transform: scale(0.9);
 }
 
+a {
+    text-decoration: none;
+}
 @media (max-width: 1024px) {
     .footer_content {
         grid-template-columns: 1fr;
