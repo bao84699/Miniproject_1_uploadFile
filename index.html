@@ -112,11 +112,26 @@
         </div>
 
         <div class="main_content">
-
             <div class="content-text">
                 Tài liệu đã tải lên
+                <div class="filter">
+                    <button class="btni">
+                        <i data-lucide="funnel"></i>
+                    </button>
+                    <select id="subject" class="filter-select" required>
+                        <option value="" disabled selected hidden>Môn học</option>
+                    </select>
+                    <select id="type" class="filter-select" required>
+                        <option value="" disabled selected hidden>Loại tài liệu</option>
+                    </select>
+                    <select id="year" class="filter-select" required>
+                        <option value="" disabled selected hidden>Năm học</option>
+                    </select>
+                    <select id="school" class="filter-select" required>
+                        <option value="" disabled selected hidden>Trường</option>
+                    </select>
+                </div>
             </div>
-
             <div class="content-document">
             </div>
             <div class="content-loadmore">
@@ -134,18 +149,14 @@
                     </button>
                 </div>
             </div>
-
         </div>
-        
     </main>
-
     <footer>
         <div class="footer_content">
             <div class="footer_content-brand">
                 <h1 onclick="location.reload()">PRISM</h1>
                 <p>Nơi khơi nguồn sáng tạo, kết nối tri thức và phát triển kỹ năng mềm cho thế hệ trẻ.</p>
             </div>
-
             <div class="footer_content-support">
                 <h2>Thông tin & hỗ trợ</h2>
                 <ul>
@@ -155,7 +166,6 @@
                     <li><a href="#">FAQ</a></li>
                 </ul>
             </div>
-
             <div class="footer_content-contact">
                 <h2>Kết nối cộng đồng</h2>
                 <ul>
@@ -169,14 +179,12 @@
                 </div>
             </div>
         </div>
-
         <div class="footer_line"></div>
-
         <div class="footer_credit">
             © 2026 Prism Studio. Bảo lưu mọi quyền.<br>Phát triển cộng đồng bền vững trên nền tảng tri thức Việt.
         </div>
     </footer>
-
+    <script src="https://unpkg.com/lucide@latest"></script>
     <script type="module" src="script.js"></script>
 </body>
 </html>

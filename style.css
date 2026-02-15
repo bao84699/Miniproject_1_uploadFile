@@ -331,6 +331,49 @@ main {
     letter-spacing: 0%;
     vertical-align: middle;
     color: #1A5F5F;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+.content-text .filter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    gap: 10px;
+}
+.content-text .filter svg {
+    width: 18px;
+    height: 18px;
+}
+.content-text .filter .btni {
+    width: 26px;
+    height: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 0.8px solid rgba(5, 58, 45, 0.2);
+    border-radius: 10px;
+    border: 0.8px solid rgba(5, 58, 45, 0.2);
+    color: #004242;
+    background-color: #053a2d1a;
+    cursor: pointer;
+}
+select {
+    background-color: #053a2d1a;
+    border-radius: 20px;
+    height: 26px;
+    padding: 0 10px;
+    border: 0.8px solid rgba(5, 58, 45, 0.2);
+    font-size: 12px;
+    font-weight: 400px;
+    color: #004242;
+    cursor: pointer;
+    font-family: "Inter", sans-serif;
+}
+select:focus {
+    border: none;
 }
 
 .content-document {
@@ -368,8 +411,10 @@ main {
 .dcmt-info {
     padding: 16px;
     display: flex;
-    flex-direction: column;
-    gap: 8.5px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    column-gap: 45px;
+    row-gap: 10px;
 }
 
 .dcmt-title {

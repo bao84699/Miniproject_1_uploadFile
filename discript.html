@@ -24,13 +24,12 @@
     <div class="wrap">
         <div class="frame1">
             <div class="item1">
-                <img src="Picture of discript/Vector.svg" alt="">
+                <i data-lucide="file"></i>
                 <p id="nameOfFile">TÀI LIỆU VỪA UP LÊN.docx</p>
             </div>
             <a href="upload.html">
                 <div class="item2">
-                    <img src="Picture of discript/Vector (1).svg" alt="">
-                    <p>Delete</p>
+                    <i data-lucide="trash-2"></i>
                 </div>
             </a>
         </div>
@@ -42,7 +41,22 @@
             </div>
             <div class="item">
                 <p>Môn học:</p>
-                <input type="text" name="" id="subject" placeholder="Nhập môn học">
+                <select id="subject" class="form-select" required>
+                    <option value="" disabled selected hidden>Chọn môn học</option>
+                </select>
+            </div>
+            <div class="item">
+                <p for="schoolYear">Năm học:</p>
+                <select id="schoolYear" class="form-select"></select>
+            </div>
+            <div class="itemBtn">
+                <p>Phân loại: </p>
+                <div class="option">
+                    <button class="doc-type" data-value="Đề thi/ kiểm tra">Đề thi/ kiểm tra</button>
+                    <button class="doc-type" data-value="Giáo trình/ slide">Giáo trình/ slide</button>
+                    <button class="doc-type" data-value="Bài tập">Bài tập</button>
+                    <button class="doc-type" data-value="Đồ án/ tiểu luận">Đồ án/ tiểu luận</button>
+                </div>
             </div>
             <div class="item">
                 <p>Mô tả:</p>
@@ -51,6 +65,8 @@
         </div>
         <button id="submit">Gửi</button>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@23.0.10/build/js/intlTelInput.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="module" src="discript.js"></script>
 </body>
