@@ -71,7 +71,7 @@ for (let i = currentYear - 5; i <= currentYear; i++) {
 //   schoolSelect.appendChild(option);
 // });
 
-/* ---------------- SUPABASE FILTER ---------------- */
+/* ---------------- SUPABASE FILTER -------------------- */
 
 const subjectFilter = document.getElementById("subject");
 const typeFilter = document.getElementById("type");
