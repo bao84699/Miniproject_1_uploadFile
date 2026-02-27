@@ -1,5 +1,40 @@
-import { supabase } from "./supabase-config.js";
 lucide.createIcons();
+import { supabase } from "./supabase-config.js";
+
+//1. Phần tử của xem trước.
+const docViewer = document.getElementById('docViewer');
+const viewerContainer = document.getElementById('viewerContainer');
+const modalDocTitle = document.getElementById('modalDocTitle');
+const closeBtn = document.querySelector('.close-viewer');
+//2. Mở tài liệu.
+function openDocument(url, name) {
+    modalDocTitle.textContent = name;
+    viewerContainer.innerHTML = `<div class="loading-spinner">Đang tải tài liệu...</div>`;
+    docViewer.style.display = "block";
+    if (url.toLowerCase().endsWith('.pdf')) {
+        viewerContainer.innerHTML = `<embed src="${url}#toolbar=0" type="application/pdf" width="100%" height="100%">`;
+    } else {
+        const googleViewerUrl = `https://docs.google.com/viewer?url=${encodeURIComponent(url)}&embedded=true`;
+        viewerContainer.innerHTML = `<iframe src="${googleViewerUrl}" style="width:100%; height:100%;" frameborder="0"></iframe>`;
+    }
+
+    docViewer.oncontextmenu = (e) => e.preventDefault();
+}
+
+// Đóng Viewer
+closeBtn.onclick = () => {
+    docViewer.style.display = "none";
+    viewerContainer.innerHTML = ""; 
+};
+
+// Đóng khi click ra ngoài vùng trắng
+window.addEventListener('click', (e) => {
+    if (e.target == docViewer) {
+        closeBtn.onclick();
+    }
+});
+
+// ----------- 3. SIDEBAR & MENU ----------------
 const toggleBtn = document.getElementById('toggleSidebar');
 const sidebar = document.getElementById('sidebar');
 toggleBtn.onclick = function(e) {
@@ -13,65 +48,49 @@ document.onclick = function(e) {
         }
     }
 };
- 
-/*-------------------SELECT------------------------------------*/
-//-----MÔN HỌC------
+
+/*-------------------SELECT OPTIONS------------------------------------*/
 const subjects = [
-  { id: "HTML/ CSS", name: "HTML/ CSS" },
-  { id: "HTMT", name: "Hệ thống máy tính" },
-  { id: "KTCT", name: "Kĩ thuật lập trình" },
-  { id: "TCC", name: "Toán cao cấp" },
-  { id: "KTCT", name: "Kinh tế chính trị" },
-  { id: "Mac-Lenin", name: "Triết học Mac-Lenin" }
+    { id: "HTML/ CSS", name: "HTML/ CSS" },
+    { id: "HTMT", name: "Hệ thống máy tính" },
+    { id: "KTCT", name: "Kĩ thuật lập trình" },
+    { id: "TCC", name: "Toán cao cấp" },
+    { id: "KTCT", name: "Kinh tế chính trị" },
+    { id: "Mac-Lenin", name: "Triết học Mac-Lenin" }
 ];
 
 const subjectSelect = document.getElementById("subject");
 subjects.forEach(s => {
-  const option = document.createElement("option");
-  option.value = s.id;
-  option.textContent = s.name;
-  subjectSelect.appendChild(option);
+    const option = document.createElement("option");
+    option.value = s.id;
+    option.textContent = s.name;
+    subjectSelect.appendChild(option);
 });
 
-
-//-----LOẠI TÀI LIỆU------
 const types = [
-  { id: "exam", name: "Đề thi / Kiểm tra" },
-  { id: "slide", name: "Giáo trình / Slide" },
-  { id: "exercise", name: "Bài tập" },
-  { id: "project", name: "Đồ án / Tiểu luận" }
+    { id: "exam", name: "Đề thi / Kiểm tra" },
+    { id: "slide", name: "Giáo trình / Slide" },
+    { id: "exercise", name: "Bài tập" },
+    { id: "project", name: "Đồ án / Tiểu luận" }
 ];
 const typeSelect = document.getElementById("type");
 types.forEach(t => {
-  const option = document.createElement("option");
-  option.value = t.id;
-  option.textContent = t.name;
-  typeSelect.appendChild(option);
+    const option = document.createElement("option");
+    option.value = t.id;
+    option.textContent = t.name;
+    typeSelect.appendChild(option);
 });
-//-----MÔN-------
+
 const yearSelect = document.getElementById("year");
 const currentYear = new Date().getFullYear();
 for (let i = currentYear - 5; i <= currentYear; i++) {
-  const option = document.createElement("option");
-  option.value = i + "-" + (i + 1);
-  option.textContent = i + " - " + (i + 1);
-  yearSelect.appendChild(option);
+    const option = document.createElement("option");
+    option.value = i + "-" + (i + 1);
+    option.textContent = i + " - " + (i + 1);
+    yearSelect.appendChild(option);
 }
-// //-------TRƯỜNG-------
-// const schools = [
-//   { id: "iuh", name: "Đại học Công nghiệp HCM" },
-//   { id: "hcmus", name: "Đại học B" },
-//   { id: "ute", name: "Đại học C" }
-// ];
-// const schoolSelect = document.getElementById("school");
-// schools.forEach(s => {
-//   const option = document.createElement("option");
-//   option.value = s.id;
-//   option.textContent = s.name;
-//   schoolSelect.appendChild(option);
-// });
 
-/* ---------------- SUPABASE FILTER -------------------- */
+/* ----------------- 4.SUPABASE FILTER & LOAD --------------------------- */
 
 const subjectFilter = document.getElementById("subject");
 const typeFilter = document.getElementById("type");
@@ -86,7 +105,6 @@ async function loadDocuments(filters = {}) {
         .select("*")
         .order("id", { ascending: false });
 
-    // áp điều kiện lọc nếu có
     if (filters.subject) query = query.eq("subject", filters.subject);
     if (filters.category) query = query.eq("category", filters.category);
     if (filters.years) query = query.eq("years", filters.years);
@@ -108,12 +126,11 @@ async function loadDocuments(filters = {}) {
     }
 
     data.forEach(doc => {
-        const link = document.createElement("a");
-        link.href = doc.url;
-        link.className = "document-link";
-        link.target = "_blank";
+        const docCard = document.createElement("div");
+        docCard.className = "document-link"; 
+        docCard.style.cursor = "pointer";
 
-        link.innerHTML = `
+        docCard.innerHTML = `
             <div class="document-item">
                 <div class="dcmt-image">
                     <img src="image/main_document-img.jpeg" alt="doc" />
@@ -127,16 +144,16 @@ async function loadDocuments(filters = {}) {
                 </div>
             </div>
         `;
-        container.appendChild(link);
+
+        docCard.onclick = () => openDocument(doc.url, doc.name);
+        container.appendChild(docCard);
     });
 }
-
-/* load lần đầu */
+// Chạy load lần đầu
 document.addEventListener("DOMContentLoaded", () => {
     loadDocuments();
 });
-
-/* khi đổi filter */
+// Xử lý Filter
 function applyFilter() {
     const filters = {
         subject: subjectFilter.value,
@@ -144,7 +161,6 @@ function applyFilter() {
         years: yearFilter.value,
         school: schoolFilter.value
     };
-
     loadDocuments(filters);
 }
 
@@ -152,54 +168,3 @@ subjectFilter.addEventListener("change", applyFilter);
 typeFilter.addEventListener("change", applyFilter);
 yearFilter.addEventListener("change", applyFilter);
 schoolFilter.addEventListener("change", applyFilter);
-
-
-/*-------------------SUPABASE------------------------------------*/
-
-document.addEventListener("DOMContentLoaded", async () => {
-    const container = document.querySelector(".content-document");
-    const { data, error } = await supabase
-        .from("PrismUploadDocuments2026")
-        .select("*")
-        .order("id", { ascending: false });
-
-    if (error) {
-        console.error(error);
-        container.innerHTML = "<p>Không thể tải tài liệu</p>";
-        return;
-    }
-    container.innerHTML = "";
-    data.forEach(doc => {
-        const link = document.createElement("a");
-        link.href = doc.url;
-        link.className = "document-link";
-        link.target = "_blank";
-        link.innerHTML = `
-            <div class="document-item">
-                <div class="dcmt-image">
-                    <img src="image/main_document-img.jpeg" alt="doc" />
-                </div>
-                <div class="dcmt-info">
-                    <p class="dcmt-title">${doc.name}</p>
-                    <div class="dcmt-type">
-                        <img src="image/main_doc.svg" alt="icon" />
-                        <p>${doc.subject || "Document"}</p>
-                    </div>
-                    <div class="dcmt-type">
-                        <img src="image/main_doc.svg" alt="icon" />
-                        <p>${doc.school || "Document"}</p>
-                    </div>
-                    <div class="dcmt-type">
-                        <img src="image/main_doc.svg" alt="icon" />
-                        <p>${doc.category || "Document"}</p>
-                    </div>
-                    <div class="dcmt-type">
-                        <img src="image/main_doc.svg" alt="icon" />
-                        <p>${doc.years || "Document"}</p>
-                    </div>
-                </div>
-            </div>
-        `;
-        container.appendChild(link);
-    });
-});
