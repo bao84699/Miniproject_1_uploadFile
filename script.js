@@ -168,3 +168,80 @@ subjectFilter.addEventListener("change", applyFilter);
 typeFilter.addEventListener("change", applyFilter);
 yearFilter.addEventListener("change", applyFilter);
 schoolFilter.addEventListener("change", applyFilter);
+
+
+/* ----------------- 5. LOGIC PHÂN TRANG (TỰ ĐỘNG CHẠY KHI DATA LOAD) --------------------------- */
+
+document.addEventListener('DOMContentLoaded', () => {
+    const itemsPerPage = 8;
+    let currentPage = 1;
+
+    const container = document.querySelector('.content-document');
+    const btnPrev = document.querySelector('.loadmore-left button');
+    const btnNext = document.querySelector('.loadmore-right button');
+    const pageText = document.querySelector('.loadmore-center p');
+
+    function applyPagination() {
+        const allItems = container.querySelectorAll('.document-link');
+        const totalItems = allItems.length;
+        const totalPages = Math.ceil(totalItems / itemsPerPage) || 1;
+
+        if (currentPage > totalPages) currentPage = totalPages;
+        if (currentPage < 1) currentPage = 1;
+
+        const start = (currentPage - 1) * itemsPerPage;
+        const end = start + itemsPerPage;
+
+        allItems.forEach((item, index) => {
+            if (index >= start && index < end) {
+                item.style.display = ""; // Hiện
+            } else {
+                item.style.display = "none"; // Ẩn
+            }
+        });
+
+        // Cập nhật text hiển thị số trang
+        if (pageText) pageText.textContent = `Trang ${currentPage}/${totalPages}`;
+
+        // Trạng thái nút bấm
+        btnPrev.style.opacity = (currentPage === 1) ? "0.3" : "1";
+        btnPrev.style.pointerEvents = (currentPage === 1) ? "none" : "auto";
+        btnNext.style.opacity = (currentPage === totalPages) ? "0.3" : "1";
+        btnNext.style.pointerEvents = (currentPage === totalPages) ? "none" : "auto";
+    }
+
+    // Theo dõi khi container thay đổi nội dung (do Supabase load xong)
+    const observer = new MutationObserver(() => {
+        applyPagination();
+    });
+
+    observer.observe(container, { childList: true });
+
+    // Sự kiện nút Next
+    btnNext.addEventListener('click', () => {
+        const allItems = container.querySelectorAll('.document-link');
+        const totalPages = Math.ceil(allItems.length / itemsPerPage);
+        if (currentPage < totalPages) {
+            currentPage++;
+            applyPagination();
+            window.scrollTo({ top: container.offsetTop - 100, behavior: 'smooth' });
+        }
+    });
+
+    // Sự kiện nút Prev
+    btnPrev.addEventListener('click', () => {
+        if (currentPage > 1) {
+            currentPage--;
+            applyPagination();
+            window.scrollTo({ top: container.offsetTop - 100, behavior: 'smooth' });
+        }
+    });
+
+    // Reset về trang 1 khi người dùng dùng bộ lọc
+    const filterSelects = document.querySelectorAll('.filter-select');
+    filterSelects.forEach(select => {
+        select.addEventListener('change', () => {
+            currentPage = 1;
+        });
+    });
+});
